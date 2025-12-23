@@ -8,7 +8,7 @@ function configApiPlugin() {
     name: 'year-wrap-config-api',
     configureServer(server) {
       const projectRoot = server.config.root
-      const configPath = path.join(projectRoot, 'config.json')
+      const configPath = path.join(projectRoot, 'public', 'config.json')
 
       server.middlewares.use('/api/config', async (req, res) => {
         try {
