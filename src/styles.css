@@ -149,6 +149,7 @@ body {
   display: grid;
   place-items: center;
   padding: 18px;
+  overflow: auto;
 }
 
 .emptyState {
@@ -168,8 +169,10 @@ body {
 }
 
 .phoneFrame {
-  width: min(420px, 92vw);
+  width: min(360px, 88vw);
   aspect-ratio: 9 / 19.5;
+  max-height: calc(100vh - 160px);
+  min-height: 520px;
   border-radius: 34px;
   padding: 10px;
   background: linear-gradient(
@@ -179,6 +182,21 @@ body {
   );
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+@media (max-height: 820px) {
+  .phoneFrame {
+    width: min(320px, 86vw);
+    max-height: calc(100vh - 140px);
+  }
+}
+
+@media (max-height: 720px) {
+  .phoneFrame {
+    width: min(290px, 86vw);
+    max-height: calc(100vh - 120px);
+    border-radius: 28px;
+  }
 }
 
 .story {

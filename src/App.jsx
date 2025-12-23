@@ -99,31 +99,48 @@ function StoryPreview({ config, activeIndex, onActiveIndexChange, onManualNaviga
   const accentColor = design.accent_color || '#6366F1'
   const bgImage = design.background_image && design.background_image.url ? design.background_image : null
 
+  const baseLayer =
+    bgGradient && bgGradient.length >= 2
+      ? `linear-gradient(180deg, ${bgGradient[0]}, ${bgGradient[1]})`
+      : `linear-gradient(${bgColor || '#ffffff'}, ${bgColor || '#ffffff'})`
+
+  const backgroundLayers = bgImage
+    ? [
+        `linear-gradient(${bgImage.overlay_color || 'rgba(0,0,0,0.25)'}, ${
+          bgImage.overlay_color || 'rgba(0,0,0,0.25)'
+        })`,
+        baseLayer,
+        `url(${bgImage.url})`,
+      ]
+    : [baseLayer]
+
   const containerStyle = {
     color: textColor,
-    background:
-      bgGradient && bgGradient.length >= 2
-        ? `linear-gradient(180deg, ${bgGradient[0]}, ${bgGradient[1]})`
-        : bgColor || '#ffffff',
+    backgroundImage: backgroundLayers.join(', '),
+    backgroundSize: bgImage ? 'auto, auto, cover' : 'auto',
+    backgroundPosition: bgImage ? 'center, center, center' : 'center',
+    backgroundRepeat: bgImage ? 'no-repeat, no-repeat, no-repeat' : 'no-repeat',
+    backgroundBlendMode: bgImage ? 'normal, multiply, normal' : 'normal',
   }
 
-  const overlayStyle = bgImage
-    ? {
-        backgroundImage: `linear-gradient(${bgImage.overlay_color || 'rgba(0,0,0,0.25)'}, ${
-          bgImage.overlay_color || 'rgba(0,0,0,0.25)'
-        }), url(${bgImage.url})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }
-    : null
-
   const content = activePage?.content || {}
+  const valueText = content.value !== undefined ? String(content.value) : ''
+
+  function computeValueFontSize(text) {
+    const t = typeof text === 'string' ? text.trim() : ''
+    const len = t.length
+    if (len <= 10) return 54
+    if (len <= 16) return 48
+    if (len <= 26) return 40
+    if (len <= 40) return 34
+    return 30
+  }
 
   const pillBase = {
     display: 'inline-block',
     padding: '8px 14px',
     borderRadius: 999,
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: 600,
     letterSpacing: 0.2,
     backdropFilter: 'blur(6px)',
@@ -145,17 +162,20 @@ function StoryPreview({ config, activeIndex, onActiveIndexChange, onManualNaviga
   }
 
   const valueStyle = {
-    fontSize: 64,
-    lineHeight: 1.0,
+    fontSize: computeValueFontSize(valueText),
+    lineHeight: 1.05,
     fontWeight: 800,
     letterSpacing: -1.5,
     textAlign: 'center',
-    margin: '18px 0 12px',
+    margin: '14px 0 10px',
+    maxWidth: 320,
+    whiteSpace: 'normal',
+    overflowWrap: 'anywhere',
     textShadow: `0 1px 22px ${toRgba('#000000', 0.12)}`,
   }
 
   const titleStyle = {
-    fontSize: 40,
+    fontSize: 34,
     lineHeight: 1.1,
     fontWeight: 800,
     textAlign: 'center',
@@ -164,12 +184,12 @@ function StoryPreview({ config, activeIndex, onActiveIndexChange, onManualNaviga
   }
 
   const subtitleStyle = {
-    fontSize: 18,
+    fontSize: 16,
     lineHeight: 1.4,
     opacity: 0.92,
     textAlign: 'center',
     marginTop: 12,
-    maxWidth: 320,
+    maxWidth: 300,
   }
 
   function goPrev() {
@@ -193,8 +213,6 @@ function StoryPreview({ config, activeIndex, onActiveIndexChange, onManualNaviga
     <div className="previewWrap">
       <div className="phoneFrame">
         <div className="story" style={containerStyle} onClick={handleTap}>
-          {overlayStyle ? <div className="storyOverlay" style={overlayStyle} /> : null}
-
           <div className="storyTop">
             <div className="progress">
               {pages.map((p, idx) => (
@@ -218,7 +236,7 @@ function StoryPreview({ config, activeIndex, onActiveIndexChange, onManualNaviga
             ) : (
               <div className="centered">
                 {content.label ? <div style={labelPillStyle}>{content.label}</div> : null}
-                {content.value !== undefined ? <div style={valueStyle}>{String(content.value)}</div> : null}
+                {content.value !== undefined ? <div style={valueStyle}>{valueText}</div> : null}
                 {content.highlight ? <div style={highlightPillStyle}>{content.highlight}</div> : null}
               </div>
             )}
@@ -461,6 +479,7 @@ export default function App() {
                     <input
                       type="checkbox"
                       checked={followCursor}
+                      style={{ accentColor: '#A5B4FC' }}
                       onChange={(e) => setFollowCursor(e.target.checked)}
                     />
                     Follow cursor
