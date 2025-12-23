@@ -161,6 +161,22 @@ function StoryPreview({ config, activeIndex, onActiveIndexChange, onManualNaviga
     color: textColor,
   }
 
+  const chromeBackplate = {
+    background: toRgba(textColor, 0.14),
+    border: `1px solid ${toRgba(textColor, 0.18)}`,
+    boxShadow: `0 6px 18px ${toRgba('#000000', 0.18)}`,
+  }
+
+  const navBtnStyle = {
+    ...chromeBackplate,
+    color: textColor,
+  }
+
+  const navMetaStyle = {
+    color: toRgba(textColor, 0.72),
+    textShadow: `0 1px 10px ${toRgba('#000000', 0.18)}`,
+  }
+
   const valueStyle = {
     fontSize: computeValueFontSize(valueText),
     lineHeight: 1.05,
@@ -220,7 +236,9 @@ function StoryPreview({ config, activeIndex, onActiveIndexChange, onManualNaviga
                   key={p.id || idx}
                   className={idx <= activeIndex ? 'bar barActive' : 'bar'}
                   style={{
-                    background: idx <= activeIndex ? toRgba('#FFFFFF', 0.85) : toRgba('#FFFFFF', 0.28),
+                    background:
+                      idx <= activeIndex ? toRgba(textColor, 0.85) : toRgba(textColor, 0.28),
+                    boxShadow: `0 1px 10px ${toRgba('#000000', 0.16)}`,
                   }}
                 />
               ))}
@@ -244,17 +262,26 @@ function StoryPreview({ config, activeIndex, onActiveIndexChange, onManualNaviga
 
           <div className="storyBottom">
             <div className="navRow">
-              <button className="navBtn" onClick={(e) => { e.stopPropagation(); goPrev() }} disabled={activeIndex === 0}>
+              <button
+                className="navBtn"
+                style={navBtnStyle}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  goPrev()
+                }}
+                disabled={activeIndex === 0}
+              >
                 Prev
               </button>
               <div className="navMeta">
-                {data?.wrapped_year ? <span className="muted">Wrapped {data.wrapped_year}</span> : null}
-                <span className="muted">
+                {data?.wrapped_year ? <span className="muted" style={navMetaStyle}>Wrapped {data.wrapped_year}</span> : null}
+                <span className="muted" style={navMetaStyle}>
                   {pages.length ? `${activeIndex + 1} / ${pages.length}` : 'No pages'}
                 </span>
               </div>
               <button
                 className="navBtn"
+                style={navBtnStyle}
                 onClick={(e) => {
                   e.stopPropagation()
                   goNext()
