@@ -287,6 +287,11 @@ export default function App() {
   const cursorDebounceRef = useRef(null)
   const [activePageIndex, setActivePageIndex] = useState(0)
   const [followCursor, setFollowCursor] = useState(true)
+  const followCursorRef = useRef(true)
+
+  useEffect(() => {
+    followCursorRef.current = followCursor
+  }, [followCursor])
 
   async function loadConfig() {
     let text = ''
@@ -333,7 +338,7 @@ export default function App() {
   }
 
   function scheduleCursorSync(nextText) {
-    if (!followCursor) return
+    if (!followCursorRef.current) return
     const editor = monacoEditorRef.current
     if (!editor) return
 
@@ -359,7 +364,7 @@ export default function App() {
   }
 
   useEffect(() => {
-    if (!followCursor) return
+    if (!followCursorRef.current) return
     const editor = monacoEditorRef.current
     if (!editor) return
     scheduleCursorSync(editor.getValue())
