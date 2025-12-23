@@ -1,0 +1,189 @@
+{
+  "data": {
+    "wrapped_year": 2025,
+    "resolved_theme_set": "energetic",
+    "theme_sets": [
+      {
+        "id": "energetic",
+        "design": {
+          "background_gradient": [
+            "#4F46E5",
+            "#6366F1"
+          ],
+          "text_color": "#FFFFFF",
+          "accent_color": "#FACC15",
+          "background_image": {
+            "url": "https://i.ibb.co/ym5VBfqD/19-Ara-2025-11-30-53.png",
+            "overlay_color": "rgba(0,0,0,0.25)"
+          }
+        }
+      },
+      {
+        "id": "calm",
+        "design": {
+          "background_gradient": [
+            "#ECFEFF",
+            "#F0FDF4"
+          ],
+          "text_color": "#064E3B",
+          "accent_color": "#22C55E",
+          "background_image": {
+            "url": "https://cdn.app.com/wrapped/bg/calm.webp",
+            "overlay_color": "rgba(255,255,255,0.4)"
+          }
+        }
+      },
+      {
+        "id": "dark_pro",
+        "design": {
+          "background_color": "#020617",
+          "text_color": "#E5E7EB",
+          "accent_color": "#38BDF8",
+          "background_image": {
+            "url": "https://cdn.app.com/wrapped/bg/dark.webp",
+            "overlay_color": "rgba(2,6,23,0.7)"
+          }
+        }
+      },
+      {
+        "id": "warm",
+        "design": {
+          "background_gradient": [
+            "#FFF7ED",
+            "#FFEDD5"
+          ],
+          "text_color": "#7C2D12",
+          "accent_color": "#FB923C",
+          "background_image": {
+            "url": "https://cdn.app.com/wrapped/bg/warm.webp",
+            "overlay_color": "rgba(255,255,255,0.3)"
+          }
+        }
+      },
+      {
+        "id": "clean",
+        "design": {
+          "background_color": "#FFFFFF",
+          "text_color": "#111827",
+          "accent_color": "#6366F1",
+          "background_image": null
+        }
+      },
+      {
+        "id": "celebration",
+        "design": {
+          "background_gradient": [
+            "#701A75",
+            "#A21CAF"
+          ],
+          "text_color": "#FFFFFF",
+          "accent_color": "#FDE68A",
+          "background_image": {
+            "url": "https://i.ibb.co/zhZzPHYb/Chat-GPT-mage-19-Ara-2025-11-32-38.png",
+            "overlay_color": "rgba(0,0,0,0.35)"
+          }
+        }
+      }
+    ],
+    "pages": [
+      {
+        "id": "intro",
+        "type": "cover",
+        "access_roles": [
+          "admin",
+          "doctor",
+          "assistant"
+        ],
+        "theme_set": "energetic",
+        "content": {
+          "title": "2025 Senin Yılındı",
+          "subtitle": "Klinikte neler yaptığını görelim"
+        }
+      },
+      {
+        "id": "appointments_summary",
+        "type": "stat",
+        "access_roles": [
+          "admin",
+          "doctor",
+          "assistant"
+        ],
+        "theme_set": "calm",
+        "content": {
+          "label": "Toplam Randevu sayısı",
+          "value": 305,
+          "highlight": "En yoğun ay: Haziran"
+        }
+      },
+      {
+        "id": "busy_time",
+        "type": "stat",
+        "access_roles": [
+          "admin",
+          "doctor",
+          "assistant"
+        ],
+        "theme_set": "clean",
+        "content": {
+          "label": "En Yoğun Saat",
+          "value": "00:00 – 02:00"
+        }
+      },
+      {
+        "id": "personal_performance",
+        "type": "stat",
+        "access_roles": [
+          "doctor",
+          "assistant"
+        ],
+        "theme_set": "warm",
+        "content": {
+          "label": "Senin Randevuların",
+          "value": 18,
+          "highlight": "En yoğun günün: Çarşamba"
+        }
+      },
+      {
+        "id": "popular_service",
+        "type": "stat",
+        "access_roles": [
+          "admin",
+          "doctor",
+          "assistant"
+        ],
+        "theme_set": "calm",
+        "content": {
+          "label": "En Popüler İşlem",
+          "value": "Akupunktur uygulama (Seans Başına)"
+        }
+      },
+      {
+        "id": "financial_overview",
+        "type": "stat",
+        "access_roles": [
+          "admin"
+        ],
+        "theme_set": "dark_pro",
+        "content": {
+          "label": "Toplam Ciro",
+          "value": -65.93,
+          "highlight": "En kârlı ay: Kasım"
+        }
+      },
+      {
+        "id": "outro",
+        "type": "closing",
+        "access_roles": [
+          "admin",
+          "doctor",
+          "assistant"
+        ],
+        "theme_set": "celebration",
+        "content": {
+          "title": "Harika Bir Yıldı :tada:",
+          "subtitle": "2026'da daha da iyisi geliyor"
+        }
+      }
+    ]
+  }
+}
